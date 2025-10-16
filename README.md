@@ -125,6 +125,3 @@ To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to
 - The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
 
 ---
-
-If you'd like, I can prepare a commit and the exact remote URL and push commands for you to run locally (this environment does not have `git`), or I can parse the saved Trivy JSON and add a prioritized findings list into this README. Tell me which you prefer.
-```
