@@ -19,7 +19,7 @@ updates:
   - package-ecosystem: "docker"
     directory: "/" # Location of Dockerfile
     schedule:
-      interval: "weekly"
+      interval: "daily"
 
   # 3. Check for updates to our GitHub Actions
   # This mitigates the risk of vulnerabilities in our CI/CD pipeline itself.
