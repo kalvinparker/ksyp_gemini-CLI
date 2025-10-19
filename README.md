@@ -57,10 +57,10 @@ I recommend addressing audit findings before publishing the image.
 ## Run
 
 ```powershell
-docker run --rm secure-gemini-cli:latest --help
+docker run -it --rm -e GEMINI_API_KEY="YOUR-GEMINI-API-KEY" secure-gemini-cli:latest
 ```
 
-Because the image uses `npx` as the entrypoint it will run the `gemini` CLI.
+Because the image uses `npx` as the entrypoint it will run the `gemini` CLI in Powershell.
 
 ## How to re-run Trivy locally
 
