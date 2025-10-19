@@ -27,12 +27,22 @@ This project isn't just a `Dockerfile`; it's a complete, secure software lifecyc
 - `package.json` — minimal file with a dependency on `@google/gemini-cli`.
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 - `.github/workflows/build-scan.yml` — GitHub Actions workflow that builds the Docker image and scans it with Trivy on push to `main`.
 ```
 
 - The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
 - The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
 ```markdown
+=======
+- **`.github/workflows/`**: Contains one authoritative workflow:
+    - **`build-and-scan.yml`**: Builds and scans every pull request. Securely publishes a new versioned image to a container registry upon the creation of a GitHub Release.
+- **`.github/dependabot.yml`**: Configuration for automated dependency updates.
+- **`SECURITY.md`**: The official security policy for the project.
+
+- The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
+- The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
+>>>>>>> Stashed changes
 =======
 - **`.github/workflows/`**: Contains one authoritative workflow:
     - **`build-and-scan.yml`**: Builds and scans every pull request. Securely publishes a new versioned image to a container registry upon the creation of a GitHub Release.
