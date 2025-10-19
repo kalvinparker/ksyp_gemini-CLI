@@ -22,7 +22,7 @@ jobs:
       # STEP 1: Build the image and load it into the local runner daemon.
       # The 'load: true' command is the critical fix.
       - name: Build and load local image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           load: true
