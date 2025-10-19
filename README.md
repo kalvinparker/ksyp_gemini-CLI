@@ -38,18 +38,6 @@ This project isn't just a `Dockerfile`; it's a complete, secure software lifecyc
 - Size: ~656.6 MB
 - Trivy scan report (full JSON): `trivy-report.json` (saved in the project root)
 
-Trivy findings (quick summary):
-
-- I parsed and searched the saved `trivy-report.json` in this repository for vulnerability records. No vulnerability objects were found in the report.
-
-Severity counts (from `trivy-report.json`):
-
-- CRITICAL: 0
-- HIGH: 0
-- MEDIUM: 0
-- LOW: 0
-- UNKNOWN: 0
-
 If you'd like a deeper supply-chain audit (for example, run `npm audit` locally and attempt auto-fixes, or re-run Trivy with a different policy), I can add step-by-step remediation guidance. Otherwise this image's saved scan contains no findings to triage.
 
 ## Build locally
@@ -94,10 +82,10 @@ docker run --rm aquasec/trivy:latest image secure-gemini-cli:latest
 
 ## Git / Commit
 
-If you'd like to commit the approved configuration locally, run these PowerShell steps (replace `<your-username>` when adding the remote):
+If you'd like to commit the approved configuration locally, run these PowerShell steps (replace `<folder-location>` and `<your-username>` when adding the remote):
 
 ```powershell
-cd "D:\My Documents\Docker Projects\secure-gemini"
+cd "<folder-location>"
 # create .gitignore if you haven't already
 @"
 node_modules/
@@ -123,7 +111,7 @@ git push -u origin main
 
 A GitHub Actions workflow (`.github/workflows/docker-build-scan.yml`) is included to build and scan the image with Trivy on push to `main`. This performs an automated check and can be adjusted to fail the build on specific severities.
 
-To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to your repository and enable the `docker-build-scan-publish.yml` workflow. Required secrets for Docker Hub: `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` (or use GHCR with `GITHUB_TOKEN`).
+To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to your repository and enable the `build-scan-publish.yml` workflow. Required secrets for Docker Hub: `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` (or use GHCR with `GITHUB_TOKEN`).
 
 ## Notes
 
