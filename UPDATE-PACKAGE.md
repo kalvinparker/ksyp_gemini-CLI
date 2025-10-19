@@ -42,7 +42,7 @@ git push origin feat/update-gemini-cli-v0.9.0
 Go to your GitHub repository. You will see a prompt to create a new pull request from the branch you just pushed. Click it.
 
 **Step 5: Review the Security Scan and Merge**
-This is the most important step. When you create the pull request, our `pr-scan.yml` workflow will automatically trigger. It will:
+This is the most important step. When you create the pull request, our `build-and-scan.yml` workflow will automatically trigger. It will:
 1.  Build a new Docker image with Gemini CLI `v0.9.0`.
 2.  Run `npm audit` inside the build.
 3.  Run `Trivy` to scan the final image for vulnerabilities.
@@ -53,4 +53,4 @@ Wait for the workflow to complete. If it passes (you see a green checkmark), you
 
 If you have configured Dependabot, it will eventually detect this update and automatically create the exact same pull request for you.
 
-The manual method above is simply for when you want to apply an update *immediately* instead of waiting for Dependabot's weekly schedule. Both methods result in a secure, scanned pull request, ensuring the security posture is maintained.
+The manual method above is simply for when you want to apply an update *immediately* instead of waiting for Dependabot's schedule. Both methods result in a secure, scanned pull request, ensuring the security posture is maintained.
