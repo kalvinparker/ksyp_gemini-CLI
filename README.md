@@ -26,8 +26,7 @@ This project isn't just a `Dockerfile`; it's a complete, secure software lifecyc
 - **`.github/dependabot.yml`**: Configuration for automated dependency updates.
 - **`SECURITY.md`**: The official security policy for the project.
 
--- The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
--- The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
+The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning. The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
 
 ## Image summary (from last local scan)
 
