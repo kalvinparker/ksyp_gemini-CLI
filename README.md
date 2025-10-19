@@ -13,7 +13,7 @@ This project isn't just a `Dockerfile`; it's a complete, secure software lifecyc
 - ✅ **Hardened Base Image:** Built on `node:22-alpine` and patches OS packages (`apk upgrade`) during the build to mitigate known vulnerabilities.
 - ✅ **Supply Chain Scanned:** Runs `npm audit` as a mandatory, blocking security gate during the Docker build.
 - ✅ **Least Privilege:** Creates and runs as a dedicated, unprivileged `appuser` instead of `root`.
-- ✅ **Continuous Vulnerability Scanning:** A GitHub Actions workflow (`pr-scan.yml`) automatically scans every pull request with Trivy to prevent new vulnerabilities from being merged.
+- ✅ **Continuous Vulnerability Scanning:** A GitHub Actions workflow (`build-and-scan.yml`) automatically scans every pull request with Trivy to prevent new vulnerabilities from being merged.
 - ✅ **Automated Dependency Management:** Dependabot is configured to automatically create pull requests for updates to the base image, `npm` packages, and the CI/CD actions themselves.
 - ✅ **Formal Security Policies:** Includes a `SECURITY.md` file with a clear policy for vulnerability reporting.
 
@@ -123,7 +123,7 @@ To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to
 
     3. Hardening: Implemented base image vulnerability patching and least-privilege (non-root) execution.
 
-    4. Supply Chain Security: Integrated mandatory npm audit security gates and a robust `build-scan-publish.yml` workflow with Trivy.
+    4. Supply Chain Security: Integrated mandatory npm audit security gates and a robust `build-and-scan.yml` workflow with Trivy.
 
     5. Configuration Management: Codified the entire secure build process in a version-controlled Dockerfile and Git repository.
 
