@@ -42,7 +42,7 @@ If you'd like a deeper supply-chain audit (for example, run `npm audit` locally 
 Run the following from the `secure-gemini` directory:
 
 ```powershell
-docker build -t secure-gemini-cli:latest .
+docker build -t secure-gemini-cli:latest
 ```
 
 If `npm audit` fails during the Docker build (it may, depending on transient vulnerabilities), you can temporarily allow the build to continue locally by changing the Dockerfile audit step to a non-blocking command (not recommended for CI):
