@@ -19,7 +19,7 @@ This project isn't just a `Dockerfile`; it's a complete, secure software lifecyc
 
 ## What is included
 
-- **`Dockerfile**: audited build that performs `apk` upgrades, updates `npm`, creates a non-root user, installs dependencies from `package.json`, runs `npm audit`, and sets the `ENTRYPOINT` to `npx gemini`.
+- **`Dockerfile`**: audited build that performs `apk` upgrades, updates `npm`, creates a non-root user, installs dependencies from `package.json`, runs `npm audit`, and sets the `ENTRYPOINT` to `npx gemini`.
 - **`package.json`**: minimal file with a dependency on `@google/gemini-cli`.
 - **`.github/workflows/`**: Contains one authoritative workflow:
     - **`build-and-scan.yml`**: Builds and scans every pull request. Securely publishes a new versioned image to a container registry upon the creation of a GitHub Release.
