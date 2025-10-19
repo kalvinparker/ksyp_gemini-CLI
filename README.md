@@ -25,7 +25,6 @@ This project isn't just a `Dockerfile`; it's a complete, secure software lifecyc
     - **`build-and-scan.yml`**: Builds and scans every pull request. Securely publishes a new versioned image to a container registry upon the creation of a GitHub Release.
 - **`.github/dependabot.yml`**: Configuration for automated dependency updates.
 - **`SECURITY.md`**: The official security policy for the project.
-```
 
 - The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
 - The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
@@ -117,6 +116,7 @@ To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to
 - The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
 - The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
 
+<<<<<<< HEAD
 ### Key Milestones Achieved:
 
     1. Strategy: Shifted from an insecure, ad-hoc installation to a secure, containerised architecture.
@@ -134,3 +134,6 @@ To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to
     7. Verification: Successfully validated the entire process with a final, successful local build.
 
 ---
+=======
+---
+>>>>>>> 8397702d3002ae86f443e3f5b0709b24ca1ba9f4
