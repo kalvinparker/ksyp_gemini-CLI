@@ -1,27 +1,36 @@
 # secure-gemini
 
-This repository contains a minimal, security-conscious Docker image for running the Google Gemini CLI (`@google/gemini-cli`). The image is built on `node:22-alpine`, uses a non-root user, upgrades base packages, updates npm, and runs `npm audit` during the image build as a security gate.
+This repository contains a minimal, security-harneded Docker image for running the Google Gemini CLI (`@google/gemini-cli`). The image is built on `node:22-alpine`, uses a non-root user, upgrades base packages, updates npm, and runs `npm audit` during the image build as a security gate.
+
+The entire configuration is designed with a "security-as-code" philosophy, ensuring a reliable and verifiable process for building and maintaining a secure tool.
+
+---
+
+## Security Features
+
+This project isn't just a `Dockerfile`; it's a complete, secure software lifecycle.
+
+- ✅ **Hardened Base Image:** Built on `node:22-alpine` and patches OS packages (`apk upgrade`) during the build to mitigate known vulnerabilities.
+- ✅ **Supply Chain Scanned:** Runs `npm audit` as a mandatory, blocking security gate during the Docker build.
+- ✅ **Least Privilege:** Creates and runs as a dedicated, unprivileged `appuser` instead of `root`.
+- ✅ **Continuous Vulnerability Scanning:** A GitHub Actions workflow (`pr-scan.yml`) automatically scans every pull request with Trivy to prevent new vulnerabilities from being merged.
+- ✅ **Automated Dependency Management:** Dependabot is configured to automatically create pull requests for updates to the base image, `npm` packages, and the CI/CD actions themselves.
+- ✅ **Formal Security Policies:** Includes a `SECURITY.md` file with a clear policy for vulnerability reporting.
 
 ## What is included
 
 - `Dockerfile` — audited build that performs `apk` upgrades, updates `npm`, creates a non-root user, installs dependencies from `package.json`, runs `npm audit`, and sets the `ENTRYPOINT` to `npx gemini`.
 - `package.json` — minimal file with a dependency on `@google/gemini-cli`.
-- `.github/workflows/docker-build-scan.yml` — GitHub Actions workflow that builds the Docker image and scans it with Trivy on push to `main`.
+- **`.github/workflows/`**: Contains two authoritative workflows:
+    - **`pr-scan.yml`**: Builds and scans every pull request.
+    - **`release.yml`**: Securely publishes a new versioned image to a container registry upon the creation of a GitHub Release.
+- **`.github/dependabot.yml`**: Configuration for automated dependency updates.
+- **`SECURITY.md`**: The official security policy for the project.
 ```
 
 - The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
 - The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
 ```markdown
-# secure-gemini
-
-This repository contains a minimal, security-conscious Docker image for running the Google Gemini CLI (`@google/gemini-cli`). The image is built on `node:22-alpine`, uses a non-root user, upgrades base packages, updates npm, and runs `npm audit` during the image build as a security gate.
-
-## What is included
-
-- `Dockerfile` — audited build that performs `apk` upgrades, updates `npm`, creates a non-root user, installs dependencies from `package.json`, runs `npm audit`, and sets the `ENTRYPOINT` to `npx gemini`.
-- `package.json` — minimal file with a dependency on `@google/gemini-cli`.
-- `.github/workflows/docker-build-scan.yml` — GitHub Actions workflow that builds the Docker image and scans it with Trivy on push to `main`.
-
 ## Image summary (from last local scan)
 
 - Image: `secure-gemini-cli:latest`
