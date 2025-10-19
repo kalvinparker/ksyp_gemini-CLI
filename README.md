@@ -117,4 +117,20 @@ To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to
 - The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
 - The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
 
+### Key Milestones Achieved:
+
+    1. Strategy: Shifted from an insecure, ad-hoc installation to a secure, containerised architecture.
+
+    2. Governance: Established a formal SECURITY.md policy, a LICENSE, and README.md documentation.
+
+    3. Hardening: Implemented base image vulnerability patching and least-privilege (non-root) execution.
+
+    4. Supply Chain Security: Integrated mandatory npm audit security gates and a robust `build-scan-publish.yml` workflow with Trivy.
+
+    5. Configuration Management: Codified the entire secure build process in a version-controlled Dockerfile and Git repository.
+
+    6. Automation: Deployed a full CI/CD pipeline for secure releases and configured Dependabot for proactive, automated dependency management.
+
+    7. Verification: Successfully validated the entire process with a final, successful local build.
+
 ---
