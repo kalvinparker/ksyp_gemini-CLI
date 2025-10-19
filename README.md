@@ -121,4 +121,4 @@ To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to
 - The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
 - The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
 
-```
+---
