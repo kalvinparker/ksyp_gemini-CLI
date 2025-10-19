@@ -14,9 +14,6 @@ This repository contains a minimal, security-conscious Docker image for running 
 ```markdown
 # secure-gemini
 
-![CI](https://img.shields.io/badge/CI-GitHub%20Actions-blue)
-![Trivy](https://img.shields.io/badge/Trivy-Scan%20Saved-brightgreen)
-
 This repository contains a minimal, security-conscious Docker image for running the Google Gemini CLI (`@google/gemini-cli`). The image is built on `node:22-alpine`, uses a non-root user, upgrades base packages, updates npm, and runs `npm audit` during the image build as a security gate.
 
 ## What is included
@@ -60,7 +57,7 @@ If `npm audit` fails during the Docker build (it may, depending on transient vul
 RUN npm audit --audit-level=moderate || true
 ```
 
-We recommend addressing audit findings before publishing the image.
+I recommend addressing audit findings before publishing the image.
 
 ## Run
 

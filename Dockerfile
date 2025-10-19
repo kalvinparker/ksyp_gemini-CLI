@@ -21,3 +21,4 @@ RUN npm audit
 
 # Set the final entrypoint for the CLI
 ENTRYPOINT ["npx", "gemini"]
+
