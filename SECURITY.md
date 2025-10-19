@@ -12,7 +12,7 @@ This project provides a configuration (`Dockerfile`) for building a secure conta
 | Releases (Tags) | :white_check_mark: |
 | Older commits | :x:                |
 
-**User Responsibility:** Users are responsible for pulling the latest changes from the `master` branch and rebuilding their images to ensure they have the most recent security patches and dependency versions. Our CI/CD pipeline (`pr-scan.yml`) continuously validates the security of the `main` branch.
+**User Responsibility:** Users are responsible for pulling the latest changes from the `master` branch and rebuilding their images to ensure they have the most recent security patches and dependency versions. My CI/CD pipeline (`pr-scan.yml`) continuously validates the security of the `main` branch.
 
 ## Reporting a Vulnerability
 
@@ -28,7 +28,7 @@ Instead, please report them directly via one of the following methods:
 **What to Expect:**
 
 When you report a vulnerability, I will make every effort to:
-1.  Acknowledge receipt of your report within 48 hours.
+1.  Acknowledge receipt of your report within 72 hours.
 2.  Provide an initial assessment of the vulnerability's validity and impact.
 3.  If the vulnerability is accepted, I will work on a fix and aim to release a patch.
 4.  Keep you informed of our progress. I will coordinate with you on the public disclosure of the vulnerability after a fix has been released.
