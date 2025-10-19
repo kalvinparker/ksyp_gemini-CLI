@@ -19,15 +19,15 @@ This project isn't just a `Dockerfile`; it's a complete, secure software lifecyc
 
 ## What is included
 
-- `Dockerfile` — audited build that performs `apk` upgrades, updates `npm`, creates a non-root user, installs dependencies from `package.json`, runs `npm audit`, and sets the `ENTRYPOINT` to `npx gemini`.
-- `package.json` — minimal file with a dependency on `@google/gemini-cli`.
+- **`Dockerfile**: audited build that performs `apk` upgrades, updates `npm`, creates a non-root user, installs dependencies from `package.json`, runs `npm audit`, and sets the `ENTRYPOINT` to `npx gemini`.
+- **`package.json`**: minimal file with a dependency on `@google/gemini-cli`.
 - **`.github/workflows/`**: Contains one authoritative workflow:
     - **`build-and-scan.yml`**: Builds and scans every pull request. Securely publishes a new versioned image to a container registry upon the creation of a GitHub Release.
 - **`.github/dependabot.yml`**: Configuration for automated dependency updates.
 - **`SECURITY.md`**: The official security policy for the project.
 
-- The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
-- The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
+-- The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
+-- The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
 
 ## Image summary (from last local scan)
 
@@ -107,9 +107,9 @@ git push -u origin main
 
 ## CI: Build and scan
 
-A GitHub Actions workflow (`.github/workflows/docker-build-scan.yml`) is included to build and scan the image with Trivy on push to `main`. This performs an automated check and can be adjusted to fail the build on specific severities.
+A GitHub Actions workflow (`.github/workflows/build-and-scan.yml`) is included to build and scan the image with Trivy on push to `main`. This performs an automated check and can be adjusted to fail the build on specific severities.
 
-To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to your repository and enable the `build-scan-publish.yml` workflow. Required secrets for Docker Hub: `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` (or use GHCR with `GITHUB_TOKEN`).
+To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to your repository and enable the `build-and-scan.yml` workflow. Required secrets for Docker Hub: `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` (or use GHCR with `GITHUB_TOKEN`).
 
 ## Notes
 
