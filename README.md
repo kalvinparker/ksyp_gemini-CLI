@@ -1,26 +1,17 @@
 # secure-gemini
 
-This repository contains a minimal, security-conscious Docker image for running the Google Gemini CLI (`@google/gemini-cli`). The image is built on `node:22-alpine`, uses a non-root user, upgrades base packages, updates npm, and runs `npm audit` during the image build as a security gate.
+This repository contains a minimal, security-conscious Docker image for running the Google Gemini CLI (`@google/gemini-cli`). The image is built on `node:alpine`, uses a non-root user, upgrades base packages, updates npm, and runs `npm audit` during the image build as a security gate.
 
 ## What is included
 
 - `Dockerfile` — audited build that performs `apk` upgrades, updates `npm`, creates a non-root user, installs dependencies from `package.json`, runs `npm audit`, and sets the `ENTRYPOINT` to `npx gemini`.
 - `package.json` — minimal file with a dependency on `@google/gemini-cli`.
-- `.github/workflows/docker-build-scan.yml` — GitHub Actions workflow that builds the Docker image and scans it with Trivy on push to `main`.
+- `.github/workflows/build-scan.yml` — GitHub Actions workflow that builds the Docker image and scans it with Trivy on push to `main`.
 ```
 
 - The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
 - The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
 ```markdown
-# secure-gemini
-
-This repository contains a minimal, security-conscious Docker image for running the Google Gemini CLI (`@google/gemini-cli`). The image is built on `node:22-alpine`, uses a non-root user, upgrades base packages, updates npm, and runs `npm audit` during the image build as a security gate.
-
-## What is included
-
-- `Dockerfile` — audited build that performs `apk` upgrades, updates `npm`, creates a non-root user, installs dependencies from `package.json`, runs `npm audit`, and sets the `ENTRYPOINT` to `npx gemini`.
-- `package.json` — minimal file with a dependency on `@google/gemini-cli`.
-- `.github/workflows/docker-build-scan.yml` — GitHub Actions workflow that builds the Docker image and scans it with Trivy on push to `main`.
 
 ## Image summary (from last local scan)
 
@@ -28,18 +19,6 @@ This repository contains a minimal, security-conscious Docker image for running 
 - OS: alpine 3.22.2
 - Size: ~656.6 MB
 - Trivy scan report (full JSON): `trivy-report.json` (saved in the project root)
-
-Trivy findings (quick summary):
-
-- I parsed and searched the saved `trivy-report.json` in this repository for vulnerability records. No vulnerability objects were found in the report.
-
-Severity counts (from `trivy-report.json`):
-
-- CRITICAL: 0
-- HIGH: 0
-- MEDIUM: 0
-- LOW: 0
-- UNKNOWN: 0
 
 If you'd like a deeper supply-chain audit (for example, run `npm audit` locally and attempt auto-fixes, or re-run Trivy with a different policy), I can add step-by-step remediation guidance. Otherwise this image's saved scan contains no findings to triage.
 
@@ -85,10 +64,10 @@ docker run --rm aquasec/trivy:latest image secure-gemini-cli:latest
 
 ## Git / Commit
 
-If you'd like to commit the approved configuration locally, run these PowerShell steps (replace `<your-username>` when adding the remote):
+If you'd like to commit the approved configuration locally, run these PowerShell steps (replace `<folder-location>` and `<your-username>` when adding the remote):
 
 ```powershell
-cd "D:\My Documents\Docker Projects\secure-gemini"
+cd "<folder-location>"
 # create .gitignore if you haven't already
 @"
 node_modules/
@@ -114,7 +93,7 @@ git push -u origin main
 
 A GitHub Actions workflow (`.github/workflows/docker-build-scan.yml`) is included to build and scan the image with Trivy on push to `main`. This performs an automated check and can be adjusted to fail the build on specific severities.
 
-To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to your repository and enable the `docker-build-scan-publish.yml` workflow. Required secrets for Docker Hub: `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` (or use GHCR with `GITHUB_TOKEN`).
+To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to your repository and enable the `build-scan-publish.yml` workflow. Required secrets for Docker Hub: `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` (or use GHCR with `GITHUB_TOKEN`).
 
 ## Notes
 
