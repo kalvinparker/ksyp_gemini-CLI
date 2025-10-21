@@ -55,11 +55,15 @@ I recommend addressing audit findings before publishing the image.
 
 ## Run
 
+This image is hosted on GitHub Container Registry (GHCR) and requires a GitHub Personal Access Token (PAT) with the `read:packages` scope for authentication.
+
+**Full instructions on token creation and running the image can be found in [USAGE.md](USAGE.md).**
+
+The final command requires your Gemini API key:
+
 ```powershell
 docker run -it --rm -e GEMINI_API_KEY="YOUR-GEMINI-API-KEY" secure-gemini-cli:latest
 ```
-
-Because the image uses `npx` as the entrypoint it will run the `gemini` CLI in Powershell.
 
 ## How to re-run Trivy locally
 
