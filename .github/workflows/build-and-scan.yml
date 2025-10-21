@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # STEP 1: Build the image and load it into the local runner daemon.
       # The 'load: true' command is the critical fix.
