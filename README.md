@@ -13,21 +13,20 @@ This project isn't just a `Dockerfile`; it's a complete, secure software lifecyc
 - ✅ **Hardened Base Image:** Built on `node:22-alpine` and patches OS packages (`apk upgrade`) during the build to mitigate known vulnerabilities.
 - ✅ **Supply Chain Scanned:** Runs `npm audit` as a mandatory, blocking security gate during the Docker build.
 - ✅ **Least Privilege:** Creates and runs as a dedicated, unprivileged `appuser` instead of `root`.
-- ✅ **Continuous Vulnerability Scanning:** A GitHub Actions workflow (`pr-scan.yml`) automatically scans every pull request with Trivy to prevent new vulnerabilities from being merged.
+- ✅ **Continuous Vulnerability Scanning:** A GitHub Actions workflow (`build-and-scan.yml`) automatically scans every pull request with Trivy to prevent new vulnerabilities from being merged.
 - ✅ **Automated Dependency Management:** Dependabot is configured to automatically create pull requests for updates to the base image, `npm` packages, and the CI/CD actions themselves.
 - ✅ **Formal Security Policies:** Includes a `SECURITY.md` file with a clear policy for vulnerability reporting.
 
 ## What is included
 
-- **`Dockerfile**: audited build that performs `apk` upgrades, updates `npm`, creates a non-root user, installs dependencies from `package.json`, runs `npm audit`, and sets the `ENTRYPOINT` to `npx gemini`.
+- **`Dockerfile`**: audited build that performs `apk` upgrades, updates `npm`, creates a non-root user, installs dependencies from `package.json`, runs `npm audit`, and sets the `ENTRYPOINT` to `npx gemini`.
 - **`package.json`**: minimal file with a dependency on `@google/gemini-cli`.
 - **`.github/workflows/`**: Contains one authoritative workflow:
     - **`build-and-scan.yml`**: Builds and scans every pull request. Securely publishes a new versioned image to a container registry upon the creation of a GitHub Release.
 - **`.github/dependabot.yml`**: Configuration for automated dependency updates.
 - **`SECURITY.md`**: The official security policy for the project.
 
--- The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning.
--- The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
+The Dockerfile runs `npm audit` during build. In CI you may want to tune the audit policy or run more advanced supply-chain scanning. The image runs as a non-root user. Confirm that any filesystem paths and environment variables used by `gemini` are writable by `appuser`.
 
 ## Image summary (from last local scan)
 
@@ -43,7 +42,7 @@ If you'd like a deeper supply-chain audit (for example, run `npm audit` locally 
 Run the following from the `secure-gemini` directory:
 
 ```powershell
-docker build -t secure-gemini-cli:latest .
+docker build -t secure-gemini-cli:latest
 ```
 
 If `npm audit` fails during the Docker build (it may, depending on transient vulnerabilities), you can temporarily allow the build to continue locally by changing the Dockerfile audit step to a non-blocking command (not recommended for CI):
@@ -124,7 +123,7 @@ To publish the image from CI (GHCR / Docker Hub), add the appropriate secrets to
 
     3. Hardening: Implemented base image vulnerability patching and least-privilege (non-root) execution.
 
-    4. Supply Chain Security: Integrated mandatory npm audit security gates and a robust `build-scan-publish.yml` workflow with Trivy.
+    4. Supply Chain Security: Integrated mandatory npm audit security gates and a robust `build-and-scan.yml` workflow with Trivy.
 
     5. Configuration Management: Codified the entire secure build process in a version-controlled Dockerfile and Git repository.
 
