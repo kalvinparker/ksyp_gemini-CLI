@@ -1,42 +1,48 @@
 # Security Policy
 
-This document outlines the security policy for the `secure-gemini` project.
+This document provides the high-level security policy for projects that use the `profile-template` as their base. It is intended to be a canonical, easy-to-find security statement that repository owners can adapt per-repo where necessary.
 
 ## Supported Versions
 
-This project provides a configuration (`Dockerfile`) for building a secure container image. The security of the final image is dependent on the versions of the components at build time. I am committed to keeping the configuration in the `main` branch up-to-date with the latest secure practices.
+Security support depends on the project's branch or release strategy. Repository maintainers should keep their project's dependencies and CI/CD configurations up to date.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| `master` branch | :white_check_mark: |
+| Version | Supported |
+| ------- | --------- |
+| `main` (or `master`) branch | :white_check_mark: |
 | Releases (Tags) | :white_check_mark: |
-| Older commits | :x:                |
+| Older commits | :x: |
 
-**User Responsibility:** Users are responsible for pulling the latest changes from the `master` branch and rebuilding their images to ensure they have the most recent security patches and dependency versions. My CI/CD pipeline (`pr-scan.yml`) continuously validates the security of the `main` branch.
+Users are responsible for pulling the latest changes and rebuilding any artifacts (for example container images) to receive security updates.
 
 ## Reporting a Vulnerability
 
-I take all security vulnerabilities seriously. I believe in coordinated disclosure and appreciate the community's help in keeping our project secure.
+We take security vulnerabilities seriously and prefer coordinated disclosure. Please do not file security reports as public issues.
 
-**How to Report a Vulnerability:**
+Preferred reporting methods:
 
-Please **DO NOT** report security vulnerabilities through public GitHub issues.
+1. Use GitHub's private vulnerability reporting feature (the "Security" tab) when available.
+2. Email the primary maintainer. (Update the email address in the repository's README to a monitored address.)
 
-Instead, please report them directly via one of the following methods:
-*   **Primary Method:** Use GitHub's private vulnerability reporting feature, available under the "Security" tab of this repository.
+What to expect from us:
 
-**What to Expect:**
+1. Acknowledge receipt within 72 hours.
+2. Provide an initial assessment of impact and validity.
+3. Work on a fix and provide updates until a patch is released.
+4. Coordinate public disclosure after a fix is published.
 
-When you report a vulnerability, I will make every effort to:
-1.  Acknowledge receipt of your report within 72 hours.
-2.  Provide an initial assessment of the vulnerability's validity and impact.
-3.  If the vulnerability is accepted, I will work on a fix and aim to release a patch.
-4.  Keep you informed of our progress. I will coordinate with you on the public disclosure of the vulnerability after a fix has been released.
+## Security responsibilities
 
-I am committed to a transparent and timely response. Thank you for helping to keep this project secure.
+Maintainers should:
+
+- Keep CI workflows (tests, linting, and security scanners) up to date.
+- Regularly update base images and dependencies.
+- Use secret scanning and dependency vulnerability scanning where available.
+- Provide clear instructions for reproducing and verifying fixes.
+
+If you are a contributor or user with security questions, please consult this document and contact the maintainers using the reporting methods above.
 
 ## Repository
 
-Repository: `secure-gemini`
+Repository: `profile-template`
 
 Primary contacts / maintainers: kalvinparker1+github@gmail.com
