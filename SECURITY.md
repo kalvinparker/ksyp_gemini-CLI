@@ -34,3 +34,9 @@ When you report a vulnerability, I will make every effort to:
 4.  Keep you informed of our progress. I will coordinate with you on the public disclosure of the vulnerability after a fix has been released.
 
 I am committed to a transparent and timely response. Thank you for helping to keep this project secure.
+
+## Repository
+
+Repository: `secure-gemini`
+
+Primary contacts / maintainers: update `README.md` with the appropriate email or team contact for this repository.
