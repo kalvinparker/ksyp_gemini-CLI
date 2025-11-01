@@ -39,4 +39,4 @@ I am committed to a transparent and timely response. Thank you for helping to ke
 
 Repository: `secure-gemini`
 
-Primary contacts / maintainers: update `README.md` with the appropriate email or team contact for this repository.
+Primary contacts / maintainers: kalvinparker1+github@gmail.com
