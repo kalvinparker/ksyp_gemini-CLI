@@ -1,0 +1,29 @@
+# .github/dependabot.yml
+#
+# Formal configuration for Dependabot to automate supply chain security.
+
+version: 2
+updates:
+  # 1. Check for updates to the npm dependencies (e.g., @google/gemini-cli)
+  # This ensures our core tool is always patched and up-to-date.
+  - package-ecosystem: "npm"
+    directory: "/" # Location of package.json
+    schedule:
+      interval: "weekly"
+    # Assign reviewers or labels if needed
+    # reviewers:
+    #   - "kalvinparker"
+
+  # 2. Check for updates to the Docker base image (node:22-alpine)
+  # This is critical for patching OS-level vulnerabilities in our container.
+  - package-ecosystem: "docker"
+    directory: "/" # Location of Dockerfile
+    schedule:
+      interval: "daily"
+
+  # 3. Check for updates to our GitHub Actions
+  # This mitigates the risk of vulnerabilities in our CI/CD pipeline itself.
+  - package-ecosystem: "github-actions"
+    directory: "/" # Location of workflow files
+    schedule:
+      interval: "weekly"
