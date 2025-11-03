@@ -1,0 +1,36 @@
+#!/usr/bin/env pwsh
+# Lightweight pre-commit hook to prevent committing node_modules and common secret patterns
+param()
+
+Write-Host "Running lightweight pre-commit checks..."
+
+# Get staged files
+$staged = git diff --cached --name-only --diff-filter=ACM
+if (-not $staged) { exit 0 }
+
+$blocked = @()
+
+foreach ($f in $staged) {
+    if ($f -like "node_modules/*" -or $f -eq "node_modules") {
+        $blocked += $f
+        continue
+    }
+
+    # Quick pattern checks for common secret fragments
+    $content = git show :"$f" 2>$null
+    if ($null -ne $content) {
+        if ($content -match "GOCSPX-[A-Za-z0-9_-]{10,}") { $blocked += "$f (Google client secret pattern)" }
+        if ($content -match "AIza[0-9A-Za-z\-_]{35}") { $blocked += "$f (Google API key pattern)" }
+        if ($content -match "-----BEGIN RSA PRIVATE KEY-----") { $blocked += "$f (RSA private key)" }
+        if ($content -match "ghp_[A-Za-z0-9]{36}") { $blocked += "$f (GitHub PAT pattern)" }
+    }
+}
+
+if ($blocked.Count -gt 0) {
+    Write-Error "Commit blocked: found disallowed files or potential secrets in staged changes:`n$($blocked -join "`n")"
+    Write-Host "If you need to commit a file, either remove node_modules from the index (git rm --cached -r node_modules) or remove the secret and rotate credentials."
+    exit 1
+}
+
+Write-Host "Pre-commit checks passed."
+exit 0
