@@ -1,0 +1,11 @@
+# pack-refs with: peeled fully-peeled sorted 
+8ebbe3656036072e35e283f8e3e58cff29d3a962 refs/heads/backup/secure-gemini-20251101-200809
+b5dec98d3fbc0998ef9a94e975e4f10e1ed286d6 refs/heads/backup/secure-gemini-20251101-202504
+8ebbe3656036072e35e283f8e3e58cff29d3a962 refs/heads/feat/update-gemini-cli-v0.9.0
+d5b0f26bce01ae11f1e9f01dcc6c203a95ffcad4 refs/heads/main
+68262fbdc90e7639054ae78c1f5450cea4bd778c refs/remotes/origin/HEAD
+80201458b9ffca488042f75de420d41bad85a956 refs/remotes/origin/main
+68262fbdc90e7639054ae78c1f5450cea4bd778c refs/remotes/origin/master
+3f50571a7424a22f2678eb76809032e540f39ca8 refs/tags/v0.1.0
+^059801c543b59ca42aed53a7b098fb4b7e460718
+336301d2fec25528c1577911e604ea9d6ded5619 refs/tags/v1.0.0
