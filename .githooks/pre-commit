@@ -1,0 +1,41 @@
+#!/usr/bin/env sh
+# Minimal cross-platform pre-commit hook.
+# Runs repo-local or system pre-commit when available. If not available,
+# only blocks committing `node_modules/` paths.
+
+set -eu
+
+# Repo-local (Windows)
+if [ -x ".venv-pre-commit/Scripts/pre-commit.exe" ]; then
+  ./.venv-pre-commit/Scripts/pre-commit.exe run --hook-stage pre-commit || exit $?
+  exit 0
+fi
+
+# Repo-local (Unix)
+if [ -x ".venv-pre-commit/bin/pre-commit" ]; then
+  ./.venv-pre-commit/bin/pre-commit run --hook-stage pre-commit || exit $?
+  exit 0
+fi
+
+# System pre-commit
+if command -v pre-commit >/dev/null 2>&1; then
+  pre-commit run --hook-stage pre-commit || exit $?
+  exit 0
+fi
+
+# Fallback: minimal guard against accidentally adding node_modules
+staged=$(git diff --cached --name-only --diff-filter=ACM || true)
+if [ -z "$staged" ]; then
+  exit 0
+fi
+
+for f in $staged; do
+  case "$f" in
+    node_modules/*|node_modules)
+      echo "Commit blocked: node_modules present in staged files ($f)" 1>&2
+      exit 1
+      ;;
+  esac
+done
+
+exit 0
