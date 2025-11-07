@@ -1,5 +1,6 @@
 {
   "dependencies": {
     "@google/gemini-cli": "latest"
-  }
+  },
+  "version": "0.1.0"
 }
