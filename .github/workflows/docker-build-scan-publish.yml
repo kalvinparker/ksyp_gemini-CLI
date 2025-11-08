@@ -1,4 +1,4 @@
-name: Docker Build, Scan, and Publish
+﻿name: Docker Build, Scan, and Publish
 
 on:
   push:
@@ -40,6 +40,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
+      - name: Debug GHCR login
+        env:
+          GHCR_PAT: ${{ secrets.GHCR_PAT }}
+          GITHUB_ACTOR: ${{ github.actor }}
+        run: |
+          echo "Attempting docker login to ghcr.io as $GITHUB_ACTOR"
+          echo "$GHCR_PAT" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          docker logout ghcr.io || true
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
         with:
@@ -53,85 +62,3 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/secure-gemini-cli:latest
-name: Docker Build, Scan, and Publish
-
-on:
-  push:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
-  packages: write
-
-jobs:
-  build-scan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
-
-      - name: Build and load local image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          load: true
-          tags: secure-gemini-cli:scan-target
-
-      - name: Scan image with Trivy
-        uses: aquasecurity/trivy-action@0.33.1
-        with:
-          name: Docker Build, Scan, and Publish
-
-          on:
-            push:
-              branches: [ "main" ]
-
-          permissions:
-            contents: read
-            packages: write
-
-          jobs:
-            build-scan:
-              runs-on: ubuntu-latest
-              steps:
-                - name: Checkout repository
-                  uses: actions/checkout@v5
-
-                - name: Build and load local image
-                  uses: docker/build-push-action@v6
-                  with:
-                    context: .
-                    load: true
-                    tags: secure-gemini-cli:scan-target
-
-                - name: Scan image with Trivy
-                  uses: aquasecurity/trivy-action@0.33.1
-                  with:
-                    image-ref: 'secure-gemini-cli:scan-target'
-                    format: 'table'
-                    exit-code: '1'
-                    ignore-unfixed: true
-                    vuln-type: 'os,library'
-                    severity: 'CRITICAL,HIGH'
-
-            publish:
-              needs: build-scan
-              runs-on: ubuntu-latest
-              if: success()
-              steps:
-                - name: Checkout repository
-                  uses: actions/checkout@v5
-
-                - name: Log in to GitHub Container Registry
-                  uses: docker/login-action@v2
-                  with:
-                    registry: ghcr.io
-                    username: ${{ github.actor }}
-                    password: ${{ secrets.GHCR_PAT }}
-
-                - name: Build and push image to registry
-                  uses: docker/build-push-action@v6
-                  with:
-                    context: .
-                    push: true
-                    tags: ghcr.io/${{ github.repository_owner }}/secure-gemini-cli:latest
