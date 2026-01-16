@@ -60,7 +60,7 @@ jobs:
           fi
 
       - name: Upload SARIF results to GitHub Code Scanning
-        uses: github/code-scanning-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: 'trivy-results.sarif'
 
@@ -116,7 +116,7 @@ jobs:
           exit-code: '1'
 
       - name: Upload SARIF results to GitHub Code Scanning
-        uses: github/code-scanning-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: 'trivy-results.sarif'
 
