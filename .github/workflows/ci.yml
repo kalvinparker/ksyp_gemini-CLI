@@ -44,6 +44,7 @@ jobs:
         uses: aquasecurity/trivy-action@0.33.1
         with:
           scan-type: 'repo'
+          skip-dirs: 'node_modules,backend/node_modules,client/node_modules'
           format: 'sarif'
           output: 'trivy-repo-results.sarif'
           ignore-unfixed: true
