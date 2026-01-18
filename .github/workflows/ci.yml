@@ -8,13 +8,11 @@ on:
   schedule:
     - cron: '0 3 * * *'
 
-permissions:
-  contents: read
-  packages: write
-
 jobs:
   build-and-scan:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -74,6 +72,9 @@ jobs:
   publish:
     needs: build-and-scan
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/main') && secrets.GHCR_PAT
     steps:
       - name: Checkout repository
