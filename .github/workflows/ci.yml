@@ -28,24 +28,23 @@ jobs:
           tags: secure-gemini-cli:scan-target
 
       - name: Scan image with Trivy (image scan)
-        uses: aquasecurity/trivy-action@0.33.1
-        with:
-          image-ref: 'secure-gemini-cli:scan-target'
-          format: 'sarif'
-          output: 'trivy-image-results.sarif'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$GITHUB_WORKSPACE":/github/workspace aquasecurity/trivy:latest image \
+            --format sarif \
+            --output /github/workspace/trivy-image-results.sarif \
+            --exit-code 1 \
+            --ignore-unfixed \
+            --vuln-type os,library \
+            --severity CRITICAL,HIGH \
+            secure-gemini-cli:scan-target
 
       - name: FS scan with Trivy (repo scan)
-        uses: aquasecurity/trivy-action@0.33.1
-        with:
-          scan-type: 'repo'
-          skip-dirs: 'node_modules,backend/node_modules,client/node_modules'
-          format: 'sarif'
-          output: 'trivy-repo-results.sarif'
-          ignore-unfixed: true
+        run: |
+          docker run --rm -v "$GITHUB_WORKSPACE":/github/workspace aquasecurity/trivy:latest fs /github/workspace \
+            --skip-dirs node_modules,backend/node_modules,client/node_modules \
+            --format sarif \
+            --output /github/workspace/trivy-repo-results.sarif \
+            --ignore-unfixed
 
       - name: Combine SARIF results
         run: |
@@ -75,10 +74,17 @@ jobs:
     permissions:
       packages: write
       contents: read
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/main') && secrets.GHCR_PAT
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/main')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+
+      - name: Check for GHCR PAT secret
+        run: |
+          if [ -z "${{ secrets.GHCR_PAT }}" ]; then
+            echo "GHCR_PAT secret not set; skipping publish job."
+            exit 0
+          fi
 
       - name: Log in to GHCR
         uses: docker/login-action@v2
