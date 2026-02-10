@@ -1,13 +1,13 @@
 IMPORTANT: Repository history has been rewritten to remove sensitive files
 
 What happened
-- We rewrote history for `kalvinparker/secure-gemini` to remove `node_modules/**` and the specific path `node_modules/@google/gemini-cli-core/dist/src/code_assist/oauth2.js`.
+-- We rewrote history for `kalvinparker/ksyp_gemini-cli` to remove `node_modules/**` and the specific path `node_modules/@google/gemini-cli-core/dist/src/code_assist/oauth2.js`.
 - This is a destructive operation: old commits were replaced and commit hashes changed.
 
 What you must do (pick one)
 1) Re-clone (recommended)
    - Delete your local copy, then clone fresh:
-     git clone https://github.com/kalvinparker/secure-gemini.git
+   git clone https://github.com/kalvinparker/ksyp_gemini-cli.git
 
 2) OR: Keep your local clone and hard-reset to the new remote history
    - From your existing local repo (careful: this will discard local uncommitted changes):

@@ -1,4 +1,4 @@
-# secure-gemini
+# ksyp_gemini-cli
 
 This repository contains a minimal, security-harneded Docker image for running the Google Gemini CLI (`@google/gemini-cli`). The image is built on `node:22-alpine`, uses a non-root user, upgrades base packages, updates npm, and runs `npm audit` during the image build as a security gate.
 
@@ -30,7 +30,7 @@ The Dockerfile runs `npm audit` during build. In CI you may want to tune the aud
 
 ## Image summary (from last local scan)
 
-- Image: `secure-gemini-cli:latest`
+- Image: `ksyp_gemini-cli:latest`
 - OS: alpine 3.22.2
 - Size: ~656.6 MB
 - Trivy scan report (full JSON): `trivy-report.json` (saved in the project root)
@@ -39,10 +39,10 @@ If you'd like a deeper supply-chain audit (for example, run `npm audit` locally 
 
 ## Build locally
 
-Run the following from the `secure-gemini` directory:
+Run the following from the `ksyp_gemini-cli` directory:
 
 ```powershell
-docker build -t secure-gemini-cli:latest
+docker build -t ksyp_gemini-cli:latest
 ```
 
 If `npm audit` fails during the Docker build (it may, depending on transient vulnerabilities), you can temporarily allow the build to continue locally by changing the Dockerfile audit step to a non-blocking command (not recommended for CI):
@@ -62,7 +62,7 @@ This image is hosted on GitHub Container Registry (GHCR) and requires a GitHub P
 The final command requires your Gemini API key:
 
 ```powershell
-docker run -it --rm -e GEMINI_API_KEY="YOUR-GEMINI-API-KEY" secure-gemini-cli:latest
+docker run -it --rm -e GEMINI_API_KEY="YOUR-GEMINI-API-KEY" ksyp_gemini-cli:latest
 ```
 
 ## How to re-run Trivy locally
@@ -71,14 +71,14 @@ If you want to re-run the Trivy scan locally (recommended after changes):
 
 ```powershell
 # using the Trivy container (no host install required)
-docker run --rm -v "%CD%":/work aquasec/trivy:latest image --format json --output trivy-report.json secure-gemini-cli:latest
+docker run --rm -v "%CD%":/work aquasec/trivy:latest image --format json --output trivy-report.json ksyp_gemini-cli:latest
 ```
 
 - The command above writes a JSON report to `trivy-report.json`. Open that file to review detailed findings.
 - To show a human-readable summary in the terminal, run:
 
 ```powershell
-docker run --rm aquasec/trivy:latest image secure-gemini-cli:latest
+docker run --rm aquasec/trivy:latest image ksyp_gemini-cli:latest
 ```
 
 ## Git / Commit
@@ -103,7 +103,7 @@ git add Dockerfile package.json .github .gitignore README.md
 git commit -m "chore: add secure-gemini Dockerfile, package.json and CI scan workflow"
 
 # Add remote and push (replace <your-username> with your GitHub username)
-git remote add origin https://github.com/<your-username>/secure-gemini.git
+git remote add origin https://github.com/<your-username>/ksyp_gemini-cli.git
 git branch -M main
 git push -u origin main
 ```

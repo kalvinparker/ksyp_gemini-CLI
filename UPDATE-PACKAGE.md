@@ -5,7 +5,7 @@ You have two secure methods for handling this. The first is the immediate, manua
 This process ensures your change is scanned and validated by the security pipeline before it becomes part of the main codebase.
 
 **Step 1: Create a New Branch**
-In your PowerShell terminal, from the `secure-gemini` directory, create a dedicated branch for this update. This is a critical best practice.
+In your PowerShell terminal, from the `ksyp_gemini-cli` directory, create a dedicated branch for this update. This is a critical best practice.
 
 ```powershell
 git checkout -b feat/update-gemini-cli-v0.9.0

@@ -1,6 +1,6 @@
 # Security Policy
 
-This document outlines the security policy for the `secure-gemini` project.
+This document outlines the security policy for the `ksyp_gemini-cli` project.
 
 ## Supported Versions
 
@@ -8,11 +8,11 @@ This project provides a configuration (`Dockerfile`) for building a secure conta
 
 | Version | Supported          |
 | ------- | ------------------ |
-| `master` branch | :white_check_mark: |
+| `main` branch | :white_check_mark: |
 | Releases (Tags) | :white_check_mark: |
 | Older commits | :x:                |
 
-**User Responsibility:** Users are responsible for pulling the latest changes from the `master` branch and rebuilding their images to ensure they have the most recent security patches and dependency versions. My CI/CD pipeline (`pr-scan.yml`) continuously validates the security of the `main` branch.
+**User Responsibility:** Users are responsible for pulling the latest changes from the `main` branch and rebuilding their images to ensure they have the most recent security patches and dependency versions. My CI/CD pipeline (`pr-scan.yml`) continuously validates the security of the `main` branch.
 
 ## Reporting a Vulnerability
 

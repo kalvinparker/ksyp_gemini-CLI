@@ -49,7 +49,7 @@ Now pull the specific package using the fully qualified name.
 1.  **Run the Pull Command:**
 
     ```bash
-    docker pull ghcr.io/kalvinparker/secure-gemini:latest
+    docker pull ghcr.io/kalvinparker/ksyp_gemini-cli:latest
     ```
 
       * **Troubleshooting Tip:** If you get a "manifest not found" error, double-check the image name and tag (`secure-gemini:latest`) for typos.
@@ -62,7 +62,7 @@ Use the `docker run` command and pass the Gemini API key as an environment varia
 1.  **Execute the Run Command:**
 
     ```bash
-    docker run -it --rm -e GEMINI_API_KEY="YOUR-GEMINI-TOKEN" ghcr.io/kalvinparker/secure-gemini:latest
+    docker run -it --rm -e GEMINI_API_KEY="YOUR-GEMINI-TOKEN" ghcr.io/kalvinparker/ksyp_gemini-cli:latest
     ```
 
       * Replace `YOUR-GEMINI-TOKEN` with the key you got in Part I.
