@@ -30,7 +30,7 @@ jobs:
           tags: secure-gemini-cli:scan-target
 
       - name: Scan image with Trivy (image scan)
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.34.0
         with:
           image-ref: 'secure-gemini-cli:scan-target'
           format: 'sarif'
@@ -41,7 +41,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
       - name: FS scan with Trivy (repo scan)
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.34.0
         with:
           scan-type: 'repo'
           format: 'sarif'
