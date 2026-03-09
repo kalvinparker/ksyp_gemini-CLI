@@ -23,7 +23,7 @@ jobs:
         run: echo "IMAGE_TAG=secure-gemini-cli:scan-target" >> $GITHUB_ENV
 
       - name: Build and load local image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           load: true
@@ -86,7 +86,7 @@ jobs:
           password: ${{ secrets.GHCR_PAT }}
 
       - name: Build and push image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           push: true
